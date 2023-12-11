@@ -25,10 +25,30 @@ stages
         steps {
 
             sh 'mvn clean package'
-            archiveArtifacts artifacts: '**/spring-petclinic-*.jar'
-            junit testResults: '**/TEST-*.xml'
+            }
+            post {
+
+                success {
+             archiveArtifacts artifacts: '**/spring-petclinic-*.jar'
+             junit testResults: '**/TEST-*.xml'
+             mail subject: 'Build stage succeed',
+             from: 'nagendhra.kothapalli@gmail.com',
+             to: 'kothapallinagenddrra@gmail.com',
+             body: "Refer to $BUILD_URL for more details"
+
+                }
+
+             failure {
+              mail subject: 'Build stage succeed',
+             from: 'nagendhra.kothapalli@gmail.com',
+             to: 'kothapallinagenddrra@gmail.com',
+             body: "Refer to $BUILD_URL for more details"
+
+                }
+    
+            }
+            
+
         }
-    }
 }
 
-}
