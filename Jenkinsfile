@@ -4,7 +4,7 @@ pipeline {
     
     options { timeout(time: 30, unit: 'MINUTES')}
 
-    triggers { pollSCM ('30 7 * * *')}
+    triggers { cron ('50 7 * * *')}
 
    
 stages 
